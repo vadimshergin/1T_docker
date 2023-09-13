@@ -7,3 +7,4 @@ ENV POSTGRES_USER="${POSTGRES_USER}"
 ENV POSTGRES_DB="${POSTGRES_DB}"
 COPY init.sql /docker-entrypoint-initdb.d/init.sql
 VOLUME  data:var/lib/postgresql/data
+PGDATA var/lib/postgresql/data/pgdata

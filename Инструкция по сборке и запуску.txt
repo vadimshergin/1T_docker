@@ -7,11 +7,30 @@
 		POSTGRES_PASSWORD
 		POSTGRES_USER
 		POSTGRES_DB
-	Значения по умолчанию:
+	значения по умолчанию:
 		POSTGRES_PASSWORD=wellcome
 		POSTGRES_USER=user
 		POSTGRES_DB=database
-	вид команды сборки для именования параметров:
+	вид команды сборки {--build-arg} для именования параметров. Используйте для каждого из параметров:
 		
-		docker build -t {имя_образа}:latest --build-arg {ПАРМЕТР}={ЗНАЧЕНИЕ} .	
+		docker build -t {имя_образа}:latest {--build-arg {ПАРАМЕТР}={значение}} .	
 
+Запуск контейнера:
+для запуска используйте команду. Задайте параметры {PORT_EX:PORT_IN}, {имя_контейнера} и используйте {имя_образа}:
+
+	docker run -d -p {PORT_EX:PORT_IN} --name {имя_контейнера} {имя_образа}:latest
+	
+	при запуске можно так же задать явно каждый из параметров окружения:
+		
+		docker run -d {-e {ПАРАМЕТР}={значение}} -p {PORT_EX:PORT_IN} --name {имя_контейнера} {имя_образа}:latest
+
+ 
+Доступ к запущеному контейнеру:
+	
+	docker exec -it -d {имя_контейнера} bash
+
+	Для использования интерфейса psql:
+		
+		psql -U {POSTGRES_USER} -d {POSTGRES_DB}
+
+	
