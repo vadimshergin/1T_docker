@@ -1,40 +1,48 @@
-Сборка:
-для сборки контейнера используйте команду:
+Сборка и запуск через Dockerfile:
 
-	docker build -t {имя_образа}:latest .
+	Сборка:
+	для сборки контейнера используйте команду:
 
-	при  сборке можно явно задать любой из параметров окружения:
-		POSTGRES_PASSWORD
-		POSTGRES_USER
-		POSTGRES_DB
-	значения по умолчанию:
-		POSTGRES_PASSWORD=wellcome
-		POSTGRES_USER=user
-		POSTGRES_DB=database
-	вид команды сборки {--build-arg} для именования параметров. Используйте для каждого из параметров:
+		docker build -t {имя_образа}:latest .
+
+		при  сборке можно явно задать любой из параметров окружения:
+			POSTGRES_PASSWORD
+			POSTGRES_USER
+			POSTGRES_DB
+		значения по умолчанию:
+			POSTGRES_PASSWORD=wellcome
+			POSTGRES_USER=user
+			POSTGRES_DB=database
+		вид команды сборки {--build-arg} для именования параметров. Используйте для каждого из параметров:
 		
-		docker build -t {имя_образа}:latest {--build-arg {ПАРАМЕТР}={значение}} .	
+			docker build -t {имя_образа}:latest {--build-arg {ПАРАМЕТР}={значение}} .	
 
-Запуск контейнера:
-	Задайте параметры {PORT_EX:PORT_IN}, {имя_контейнера} и используйте {имя_образа}:
+	Запуск контейнера:
+		Задайте параметры {PORT_EX:PORT_IN}, {имя_контейнера} и используйте {имя_образа}:
 
-		docker run -d -p {PORT_EX:PORT_IN} -v /data:/var/lib/postgresql/data --name {имя_контейнера} {имя_образа}:latest
+			docker run -d -p {PORT_EX:PORT_IN} -v /data:/var/lib/postgresql/data --name {имя_контейнера} {имя_образа}:latest
 	
-	при запуске можно так же задать явно каждый из параметров окружения:
+		при запуске можно так же задать явно каждый из параметров окружения:
 		
-		docker run -d {-e {ПАРАМЕТР}={значение}} -p {PORT_EX:PORT_IN} -v /data:/var/lib/postgresql/data --name {имя_контейнера} {имя_образа}:latest
+			docker run -d {-e {ПАРАМЕТР}={значение}} -p {PORT_EX:PORT_IN} -v /data:/var/lib/postgresql/data --name {имя_контейнера} {имя_образа}:latest
 
  
-Доступ к запущеному контейнеру:
+	Доступ к запущеному контейнеру:
 	
-	docker exec -it {имя_контейнера} bash
+		docker exec -it {имя_контейнера} bash
 
-	Для использования интерфейса psql:
+		Для использования интерфейса psql:
 		
-		psql -U {POSTGRES_USER} -d {POSTGRES_DB}
+			psql -U {POSTGRES_USER} -d {POSTGRES_DB}
 
-	Или:
+		Или:
 	
-	docker exec -it {имя_контейнера} psql -U {POSTGRES_USER} -d {POSTGRES_DB}
+			docker exec -it {имя_контейнера} psql -U {POSTGRES_USER} -d {POSTGRES_DB}
+
+
+
+Использование docker-compose.yml:
+
+	docker-compose up
 
 
