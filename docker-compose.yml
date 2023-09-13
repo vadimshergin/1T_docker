@@ -3,6 +3,8 @@ services:
     db_test:
         build: .
         ports:
-            - ''5432:5432''
+            - 5432:5432
+        volumes:
+            - temp_data:/var/lib/postgresql/data
 volumes:
-    data:
+    temp_data:
